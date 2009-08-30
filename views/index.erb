@@ -12,14 +12,17 @@
     };
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-    var markerpos = new google.maps.LatLng(0, 0);
-    var marker = new google.maps.Marker({
-      position: markerpos,
+    var markers = [];
+    var tmp = null;
+<% @loans.each do |loan| %>
+    tmp = new google.maps.Marker({
+      position: new google.maps.LatLng("<%= loan['location']['geo']['pairs'].split.join('", "') %>"),
       map: map,
-      title: 'Latitud 0, Longitud 0'
+      title: '<%= loan['name'].gsub("'", "\\'") %>'
     });
+    markers.push(tmp)
+<% end %>
   }
-
 </script>
 </head>
 <body onload="initialize()">
