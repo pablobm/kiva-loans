@@ -4,10 +4,15 @@ require 'json'
 
 class KivaLoansApp < Sinatra::Base
   get '/' do
-    json_data = Net::HTTP.get URI.parse('http://api.kivaws.org/v1/lenders/pablobm/loans.json')
-    data = JSON.parse(json_data)
-    @loans = data['loans']
+    @loans = retrieve_loans('pablobm')
     erb :index
   end
+end
+
+
+def retrieve_loans(user_id)
+  json_data = Net::HTTP.get URI.parse("http://api.kivaws.org/v1/lenders/#{user_id}/loans.json")
+  data = JSON.parse(json_data)
+  return data['loans']
 end
 
