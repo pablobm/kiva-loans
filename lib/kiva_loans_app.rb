@@ -5,6 +5,9 @@ require 'lib/sinatra_flash'
 
 class KivaLoansApp < Sinatra::Base
 
+  set :static, true
+  set :public, File.join(APP_ROOT, 'public')
+
   include SinatraFlash
 
   get '/' do
