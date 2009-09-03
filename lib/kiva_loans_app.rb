@@ -27,16 +27,19 @@ class KivaLoansApp < Sinatra::Base
     end
   end
 
-end
+  helpers do
+    include Rack::Utils
+    alias_method :h, :escape_html
+  end
 
 
-def retrieve_loans(user_id)
-  json_data = Net::HTTP.get URI.parse("http://api.kivaws.org/v1/lenders/#{user_id}/loans.json")
-  data = JSON.parse(json_data)
-  if data['code'] && data['code'] == 'org.kiva.InvalidIdentifier'
-    nil
-  else
-    data['loans']
+  def retrieve_loans(user_id)
+    json_data = Net::HTTP.get URI.parse("http://api.kivaws.org/v1/lenders/#{h user_id}/loans.json")
+    data = JSON.parse(json_data)
+    if data['code'] && data['code'] == 'org.kiva.InvalidIdentifier'
+      nil
+    else
+      data['loans']
+    end
   end
 end
-
