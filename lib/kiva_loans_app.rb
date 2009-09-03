@@ -5,7 +5,7 @@ require 'json'
 class KivaLoansApp < Sinatra::Base
   get '/' do
     @loans = retrieve_loans(params[:user_id])
-    erb :index
+    erb :map
   end
 end
 
