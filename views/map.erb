@@ -29,5 +29,14 @@
 <body onload="initialize()">
   <h1>Loans by <%= @user_id %></h1>
   <div id="map_canvas" style="width:100%; height:100%"></div>
+
+<% @loans.each do |loan| %>
+  <h2><a href="http://www.kiva.org/app.php?page=businesses&action=about&id=<%= loan['id'] %>"><%= loan['name'] %></a><h2>
+  <table>
+    <tr><th>From</th><td><%= loan['location']['town'] %>, <%= loan['location']['country'] %></td></tr>
+    <tr><th>Trade</th><td><%= loan['sector'] %>/<%= loan['activity'] %></td></tr>
+    <tr><th>Loan amount</th><td>$<%= loan['loan_amount'] %></td></tr>
+  </table>
+<% end %>
 </body>
 </html>
