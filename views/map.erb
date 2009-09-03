@@ -6,6 +6,7 @@
 <script type="text/javascript">
   var markers_options = [];
   var map;
+  var infowindow = new google.maps.InfoWindow();
   function initialize() {
     var latlng = new google.maps.LatLng(0, 0);
     var myOptions = {
@@ -15,10 +16,20 @@
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     for (i in markers_options) {
-      var mo = markers_options[i];
-      mo.map = map;
-      new google.maps.Marker(mo);
+      createMarker(markers_options[i])
     }
+  }
+
+  function createMarker(options) {
+    options.map = map;
+    var marker = new google.maps.Marker(options);
+
+    google.maps.event.addListener(marker, 'click', function() {
+      console.log(infowindow, marker);
+      infowindow.close();
+      infowindow.content = document.getElementById('loan-' + options.loan_id);;
+      infowindow.open(map,marker);
+    });
   }
 </script>
 </head>
@@ -27,19 +38,22 @@
   <div id="map_canvas" style="width:100%; height:100%"></div>
 
 <% @loans.each do |loan| %>
-  <h2><a href="http://www.kiva.org/app.php?page=businesses&action=about&id=<%= loan['id'] %>"><%= loan['name'] %></a><h2>
-  <table>
-    <tr><th>From</th><td><%= loan['location']['town'] %>, <%= loan['location']['country'] %></td></tr>
-    <tr><th>Trade</th><td><%= loan['sector'] %>/<%= loan['activity'] %></td></tr>
-    <tr><th>Loan amount</th><td>$<%= loan['loan_amount'] %></td></tr>
-  </table>
-  <script type="text/javascript">
+  <div id="loan-<%= loan['id'] %>">
+    <h2><a href="http://www.kiva.org/app.php?page=businesses&action=about&id=<%= loan['id'] %>"><%= loan['name'] %></a><h2>
+    <table>
+      <tr><th>From</th><td><%= loan['location']['town'] %>, <%= loan['location']['country'] %></td></tr>
+      <tr><th>Trade</th><td><%= loan['sector'] %>/<%= loan['activity'] %></td></tr>
+      <tr><th>Loan amount</th><td>$<%= loan['loan_amount'] %></td></tr>
+    </table>
+    <script type="text/javascript">
 var mo = {
   position: new google.maps.LatLng("<%= loan['location']['geo']['pairs'].split.join('", "') %>"),
-  title: '<%= loan['name'].gsub("'", "\\'") %>'
+  title: '<%= loan['name'].gsub("'", "\\'") %>',
+  loan_id: '<%= loan['id'] %>'
 };
 markers_options.push(mo);
-  </script>
+    </script>
+  </div>
 <% end %>
 </body>
 </html>
