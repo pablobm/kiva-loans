@@ -15,14 +15,23 @@ class KivaLoansApp < Sinatra::Base
   get '/:user_id' do |user_id|
     @user_id = user_id
     @loans = retrieve_loans(@user_id)
-    erb :map
+    if @loans
+      erb :map
+    else
+      redirect '/'
+    end
   end
+
 end
 
 
 def retrieve_loans(user_id)
   json_data = Net::HTTP.get URI.parse("http://api.kivaws.org/v1/lenders/#{user_id}/loans.json")
   data = JSON.parse(json_data)
-  return data['loans']
+  if data['code'] && data['code'] == 'org.kiva.InvalidIdentifier'
+    nil
+  else
+    data['loans']
+  end
 end
 
