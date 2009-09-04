@@ -12,9 +12,15 @@
 <body>
 
 <div class="container">
-  <% if flash[:error] %><p><%= flash[:error] %></p><% end %>
+  <% if flash[:error] %><p class="error"><%= flash[:error] %></p><% end %>
   <h1><%= @title %></h1>
   <%= yield %>
+
+  <h2>What is Kiva?</h2>
+  <p><strong>Kiva's mission is to connect people through lending for the sake of alleviating poverty.</strong></p>
+  <p><a href="http://kiva.org">Kiva.org</a> is a micro-lending website. It allows individuals (like you) to lend directly to entrepreneurs around the globe.</p>
+  <p>The people who ask for loans on Kiva's site are real individuals in need of funding - not marketing material. When you browse entrepreneurs' profiles on the site, choose someone to lend to, and then make a loan, you are helping a real person make great strides towards economic independence and improve life for themselves, their family, and their community.</p>
+
 </div>
 
 </body>

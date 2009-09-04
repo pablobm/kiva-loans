@@ -22,7 +22,7 @@ class KivaLoansApp < Sinatra::Base
 
   get '/:user_id' do |user_id|
     @user_id = user_id
-    @loans = retrieve_loans(@user_id)
+    @loans, @paging = retrieve_loans(@user_id)
     if @loans
       erb :map
     else
@@ -44,7 +44,7 @@ class KivaLoansApp < Sinatra::Base
     if data['code'] && data['code'] == 'org.kiva.InvalidIdentifier'
       nil
     else
-      data['loans']
+      [data['loans'], data['paging']]
     end
   end
 end
