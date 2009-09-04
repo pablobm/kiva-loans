@@ -3,24 +3,25 @@
 module Sinatra
   module Flash
 
-  def self.included(base)
-    base.module_eval do
-      enable :sessions
-      alias_method :erb_without_flash, :erb
-      alias_method :erb, :erb_with_flash
+    def self.included(base)
+      base.module_eval do
+        enable :sessions
+        alias_method :erb_without_flash, :erb
+        alias_method :erb, :erb_with_flash
+      end
     end
-  end
 
-  def flash
-    session[:flash] = {} if session[:flash] && session[:flash].class != Hash
-    session[:flash] ||= {}
-  end
+    def flash
+      session[:flash] = {} if session[:flash] && session[:flash].class != Hash
+      session[:flash] ||= {}
+    end
 
-  def erb_with_flash(*args)
-    ret = erb_without_flash(*args)
-    flash.clear
-    ret
-  end
+    def erb_with_flash(*args)
+      ret = erb_without_flash(*args)
+      flash.clear
+      ret
+    end
 
   end
 end
+
