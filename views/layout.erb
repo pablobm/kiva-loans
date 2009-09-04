@@ -13,6 +13,7 @@
 
 <div class="container">
   <% if flash[:error] %><p><%= flash[:error] %></p><% end %>
+  <h1><%= @title %></h1>
   <%= yield %>
 </div>
 
