@@ -9,6 +9,7 @@
 <body>
   <div class="container">
     <% if flash[:error] %><p><%= flash[:error] %></p><% end %>
+    <p>Enter a Kiva username below and see the corresponding loans on a map:</p>
     <form action="/">
       <p><label>User name: <input type="text" name="user_id" /></label> <input type="submit" /></p>
     </form>
