@@ -1,44 +1,51 @@
-<html>
-<head>
-<title>Loans by user <%=h @user_id %></title>
+<% @title = "Loans by user #{h @user_id}" %>
+
+<% content_for :html_header do %>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
-  var markers_options = [];
-  var map;
-  var infowindow = new google.maps.InfoWindow();
-  function initialize() {
-    var latlng = new google.maps.LatLng(0, 0);
-    var myOptions = {
-      zoom: 2,
-      center: latlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-    for (i in markers_options) {
-      createMarker(markers_options[i])
-    }
-  }
+var markers_options = [];
+var map;
+var infowindow = new google.maps.InfoWindow();
 
-  function createMarker(options) {
-    options.map = map;
-    var marker = new google.maps.Marker(options);
+function initialize() {
+  var latlng = new google.maps.LatLng(0, 0);
+  var myOptions = {
+    zoom: 2,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
 
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.close();
-      infowindow.set_content(document.getElementById('loan-' + options.loan_id).innerHTML);
-      infowindow.open(map,marker);
-    });
+  map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+  for (i in markers_options) {
+    createMarker(markers_options[i])
   }
+}
+
+function createMarker(options) {
+  options.map = map;
+  var marker = new google.maps.Marker(options);
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.close();
+    infowindow.set_content(document.getElementById('loan-' + options.loan_id).innerHTML);
+    infowindow.open(map,marker);
+  });
+}
 </script>
-</head>
-<body onload="initialize()">
-  <h1>Loans by <%= @user_id %></h1>
-  <div id="map_canvas" style="width:100%; height:100%"></div>
+<% end %>
+
+<% content_for :html_footer do %>
+<script type="text/javascript">
+initialize();
+</script>
+<% end %>
+
+<div id="map-canvas" style="width:100%; height:500px"></div>
 
 <% @loans.each do |loan| %>
   <div id="loan-<%= loan['id'] %>">
-    <h2><a href="http://www.kiva.org/app.php?page=businesses&action=about&id=<%= loan['id'] %>"><%= loan['name'] %></a><h2>
+    <h2><a href="http://www.kiva.org/app.php?page=businesses&amp;action=about&amp;id=<%= loan['id'] %>"><%= loan['name'] %></a></h2>
     <table>
       <tr><th>From</th><td><%= loan['location']['town'] %>, <%= loan['location']['country'] %></td></tr>
       <tr><th>Trade</th><td><%= loan['sector'] %>/<%= loan['activity'] %></td></tr>
@@ -54,5 +61,4 @@ markers_options.push(mo);
     </script>
   </div>
 <% end %>
-</body>
-</html>
+

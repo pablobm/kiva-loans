@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'net/http'
 require 'json'
 require 'lib/sinatra_flash'
+require 'lib/sinatra/content_for'
 
 class KivaLoansApp < Sinatra::Base
 
@@ -31,6 +32,7 @@ class KivaLoansApp < Sinatra::Base
   end
 
   helpers do
+    include Sinatra::ContentFor
     include Rack::Utils
     alias_method :h, :escape_html
   end
