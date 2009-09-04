@@ -9,7 +9,7 @@
   <link href="/css/screen.css" rel="stylesheet" type="text/css" />
   <% yield_content :html_header %>
 </head>
-<body>
+<body><div id="body">
 
 <div class="container">
   <% if flash[:error] %><p class="error"><%= flash[:error] %></p><% end %>
@@ -23,7 +23,7 @@
 
 </div>
 
-</body>
+</div></body>
 <% yield_content :html_footer %>
 </html>
 
