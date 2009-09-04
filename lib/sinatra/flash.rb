@@ -1,6 +1,7 @@
 # Took the code at http://blog.kabisa.nl/2009/02/16/flash-messages-for-sinatra/
 # and made it into a mixin
-module SinatraFlash
+module Sinatra
+  module Flash
 
   def self.included(base)
     base.module_eval do
@@ -21,4 +22,5 @@ module SinatraFlash
     ret
   end
 
+  end
 end

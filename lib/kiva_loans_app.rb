@@ -1,15 +1,13 @@
 require 'sinatra/base'
 require 'net/http'
 require 'json'
-require 'lib/sinatra_flash'
+require 'lib/sinatra/flash'
 require 'lib/sinatra/content_for'
 
 class KivaLoansApp < Sinatra::Base
 
   set :root, APP_ROOT
   set :static, true
-
-  include SinatraFlash
 
   get '/' do
     user_id = params[:user_id]
@@ -33,6 +31,7 @@ class KivaLoansApp < Sinatra::Base
 
   helpers do
     include Sinatra::ContentFor
+    include Sinatra::Flash
     include Rack::Utils
     alias_method :h, :escape_html
   end
