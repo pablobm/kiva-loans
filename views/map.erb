@@ -41,7 +41,7 @@ initialize();
 </script>
 <% end %>
 
-<p>Kiva user <a href="http://kiva.org/lender/<%=h @user_id %>"><%=h @user_id %></a> has given loans to <%= @paging['total'] %> entrepeneurs<% if @paging['total'] > @paging['page_size'] %>. His latest <%= @paging['page_size'] %> loans are<% else %>,<% end %> shown on the map. Click on the markers to see more details on each loan.</p>
+<p>Kiva user <a href="http://kiva.org/lender/<%=h @user_id %>"><%=h @user_id %></a> has taken part in loans to <%= @paging['total'] %> entrepeneurs<% if @paging['total'] > @paging['page_size'] %>. His latest <%= @paging['page_size'] %> loans are<% else %>,<% end %> shown on the map. Click on the markers to see more details on each loan.</p>
 
 <p id="map-canvas" style="width:100%; height:500px"></p>
 
