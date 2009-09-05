@@ -3,6 +3,21 @@
   padding-top: 1.5em
 }
 
-.loan {
+.loan-wrap {
   display: none;
+}
+
+.loan h2,
+.loan .image-wrap {
+  text-align: center;
+}
+.loan img {
+  display: inline;
+}
+.loan .details {
+  width: 300px;
+}
+.loan th {
+  text-align: right;
+  vertical-align: top;
 }
