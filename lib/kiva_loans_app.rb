@@ -48,9 +48,21 @@ class KivaLoansApp < Sinatra::Base
     end
   end
 
-  def retrieve_recent
+  def retrieve_recent(limit = 10)
     json_data = Net::HTTP.get URI.parse("http://api.kivaws.org/v1/lending_actions/recent.json")
-    JSON.parse(json_data)['lending_actions']
+    actions = JSON.parse(json_data)['lending_actions']
+    ret = []
+    lender_ids = []
+    while ret.size < 10
+      action = actions[rand(actions.size)]
+      lender_id = action['lender']['lender_id']
+      unless lender_ids.include?(lender_id)
+        lender_ids << lender_id
+        ret << action
+      end
+    end
+    ret
   end
 
 end
+
