@@ -53,8 +53,8 @@ class KivaLoansApp < Sinatra::Base
     actions = JSON.parse(json_data)['lending_actions']
     ret = []
     lender_ids = []
-    while ret.size < 10
-      action = actions[rand(actions.size)]
+    while ret.size < 10 && ! actions.empty?
+      action = actions.delete_at(rand(actions.size))
       lender_id = action['lender']['lender_id']
       unless lender_ids.include?(lender_id)
         lender_ids << lender_id
