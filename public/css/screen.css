@@ -1,6 +1,11 @@
 
-#body {
-  padding-top: 1.5em
+body {
+  background: #e5e5e5;
+}
+
+#main-wrap {
+  padding: 1.5em 0;
+  background: white;
 }
 
 .loan-wrap {
@@ -21,3 +26,8 @@
   text-align: right;
   vertical-align: top;
 }
+
+#footer-wrap {
+  padding: 1em 0;
+}
+

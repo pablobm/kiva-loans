@@ -11,7 +11,7 @@
 </head>
 <body><div id="body">
 
-<div class="container">
+<div id="main-wrap"><div id="main" class="container">
   <% if flash[:error] %><p class="error"><%= flash[:error] %></p><% end %>
   <h1><%= @title %></h1>
   <%= yield %>
@@ -20,8 +20,11 @@
   <p><strong>Kiva's mission is to connect people through lending for the sake of alleviating poverty.</strong></p>
   <p><a href="http://kiva.org">Kiva.org</a> is a micro-lending website. It allows individuals (like you) to lend directly to entrepreneurs around the globe.</p>
   <p>The people who ask for loans on Kiva's site are real individuals in need of funding - not marketing material. When you browse entrepreneurs' profiles on the site, choose someone to lend to, and then make a loan, you are helping a real person make great strides towards economic independence and improve life for themselves, their family, and their community.</p>
+</div></div>
 
-</div>
+<div id="footer-wrap"><div id="footer" class="container">
+  <p>This application was built by Pablo Brasero Moreno (<a href="http://pablobm.com">pablobm</a>), using the <a href="http://www.sinatrarb.com/">Sinatra</a> development framework in <a href="http://www.ruby-lang.org">Ruby</a>, and hosted with <a href="http://heroku.com/">Heroku</a>. The code is available at <a href="http://github.com/pablobm/kiva-loans">GitHub</a>.</p>
+</div></div>
 
 </div></body>
 <% yield_content :html_footer %>
