@@ -14,6 +14,7 @@ class KivaLoansApp < Sinatra::Base
     if user_id
       redirect "/#{user_id}"
     else
+      @recent = retrieve_recent
       erb :index
     end
   end
@@ -46,4 +47,10 @@ class KivaLoansApp < Sinatra::Base
       [data['loans'], data['paging']]
     end
   end
+
+  def retrieve_recent
+    json_data = Net::HTTP.get URI.parse("http://api.kivaws.org/v1/lending_actions/recent.json")
+    JSON.parse(json_data)['lending_actions']
+  end
+
 end

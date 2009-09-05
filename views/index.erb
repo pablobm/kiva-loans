@@ -5,3 +5,11 @@
   <p><label>User name: <input type="text" name="user_id" /></label> <input type="submit" /></p>
 </form>
 
+<h2>Want some examples?</h2>
+<p>Here you have a small sample of the latest activity by Kiva lenders:</p>
+<ul>
+<% @recent.each do |r| %>
+  <li><%= r['lender']['name'] %><% if r['lender']['whereabouts'] %>, from <%= r['lender']['whereabouts'] %>,<% end %> just gave a loan to <%= r['loan']['name'] %>, from <%= r['loan']['location']['town'] %>, <%= r['loan']['location']['country'] %>.</li>
+<% end %>
+</ul>
+
