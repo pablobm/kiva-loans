@@ -41,13 +41,13 @@ initialize();
 </script>
 <% end %>
 
-<p>Kiva user <a href="http://kiva.org/lender/<%=h @user_id %>"><%=h @user_id %></a> has given loans to <%= @paging['total'] %> entrepeneurs<% if @paging['total'] > @paging['page_size'] %>. His latest <%= @paging['page_size'] %> loans are<% else %>,<% end %> shown on the map. Click on the markers to see more details on each loan.</p>
+<p>Kiva user <a href="http://kiva.org/lender/<%=h @user_id %>?app_id=com.heroku.kiva-loans"><%=h @user_id %></a> has given loans to <%= @paging['total'] %> entrepeneurs<% if @paging['total'] > @paging['page_size'] %>. His latest <%= @paging['page_size'] %> loans are<% else %>,<% end %> shown on the map. Click on the markers to see more details on each loan.</p>
 
 <p id="map-canvas" style="width:100%; height:500px"></p>
 
 <% @loans.each do |loan| %>
   <div class="loan-wrap"><div id="loan-<%= loan['id'] %>" class="loan">
-    <h2><a href="http://www.kiva.org/app.php?page=businesses&amp;action=about&amp;id=<%= loan['id'] %>"><%= loan['name'] %></a></h2>
+    <h2><a href="http://www.kiva.org/app.php?page=businesses&amp;action=about&amp;id=<%= loan['id'] %>&amp;app_id=com.heroku.kiva-loans"><%= loan['name'] %></a></h2>
     <p class="image-wrap"><img src="http://s3.kiva.org/img/w200h200/<%= loan['image']['id'] %>.jpg" /></p>
     <table class="details">
       <tr><th>From</th><td><%= loan['location']['town'] %>, <%= loan['location']['country'] %></td></tr>
