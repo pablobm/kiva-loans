@@ -19,6 +19,10 @@ class KivaLoansApp < Sinatra::Base
     end
   end
 
+  get '/favicon.ico' do
+    raise Sinatra::NotFound
+  end
+
   get '/:user_id' do |user_id|
     @user_id = user_id
     @loans, @paging = retrieve_loans(@user_id)
