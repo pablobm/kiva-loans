@@ -28,7 +28,7 @@ function createMarker(options) {
 
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.close();
-    infowindow.set_content(document.getElementById('loan-' + options.loan_id).parentNode.innerHTML);
+    infowindow.setContent(document.getElementById('loan-' + options.loan_id).parentNode.innerHTML);
     infowindow.open(map,marker);
   });
 }
