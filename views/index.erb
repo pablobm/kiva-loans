@@ -9,7 +9,7 @@
 <p>Here you have a small sample of the latest activity by Kiva lenders:</p>
 <ul>
 <% @recent.each do |r| %>
-  <li><a href="/<%=h r['lender']['lender_id'] %>"><%= r['lender']['name'] %></a><% if r['lender']['whereabouts'] %>, from <%= r['lender']['whereabouts'] %>,<% end %> just gave a loan to <%= r['loan']['name'] %>, from <%= r['loan']['location']['town'] %>, <%= r['loan']['location']['country'] %>.</li>
+  <li><%= link_to r.lender_name, r.lender_url %><% if r.lender_location %>, from <%= r.lender_location %>,<% end %> just gave a loan to <%= r.borrower_name %>, from <%= r.borrower_town %>, <%= r.borrower_country %>.</li>
 <% end %>
 </ul>
 

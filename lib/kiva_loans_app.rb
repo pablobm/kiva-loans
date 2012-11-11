@@ -1,8 +1,11 @@
 require 'sinatra/base'
 require 'net/http'
 require 'multi_json'
+
 require 'lib/sinatra/flash'
 require 'lib/sinatra/content_for'
+require 'lib/sinatra/html_helper'
+require 'lib/kiva_loans/loan'
 
 class KivaLoansApp < Sinatra::Base
 
@@ -37,6 +40,7 @@ class KivaLoansApp < Sinatra::Base
   helpers do
     include Sinatra::ContentFor
     include Sinatra::Flash
+    include Sinatra::HtmlHelper
     include Rack::Utils
     alias_method :h, :escape_html
   end
@@ -58,10 +62,9 @@ class KivaLoansApp < Sinatra::Base
     ret = []
     lender_ids = []
     while ret.size < 10 && ! actions.empty?
-      action = actions.delete_at(rand(actions.size))
-      lender_id = action['lender']['lender_id']
-      unless lender_ids.include?(lender_id)
-        lender_ids << lender_id
+      action = Loan.new(actions.delete_at(rand(actions.size)))
+      unless lender_ids.include?(action.lender_id)
+        lender_ids << action.lender_id
         ret << action
       end
     end
