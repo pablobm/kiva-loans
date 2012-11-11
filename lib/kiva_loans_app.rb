@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'net/http'
-require 'json'
+require 'multi_json'
 require 'lib/sinatra/flash'
 require 'lib/sinatra/content_for'
 
@@ -44,7 +44,7 @@ class KivaLoansApp < Sinatra::Base
 
   def retrieve_loans(user_id)
     json_data = Net::HTTP.get URI.parse("http://api.kivaws.org/v1/lenders/#{h user_id}/loans.json")
-    data = JSON.parse(json_data)
+    data = MultiJson.decode(json_data)
     if data['code'] && data['code'] == 'org.kiva.InvalidIdentifier'
       nil
     else
@@ -54,7 +54,7 @@ class KivaLoansApp < Sinatra::Base
 
   def retrieve_recent(limit = 10)
     json_data = Net::HTTP.get URI.parse("http://api.kivaws.org/v1/lending_actions/recent.json")
-    actions = JSON.parse(json_data)['lending_actions']
+    actions = MultiJson.decode(json_data)['lending_actions']
     ret = []
     lender_ids = []
     while ret.size < 10 && ! actions.empty?
