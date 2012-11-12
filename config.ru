@@ -1,3 +1,4 @@
-require 'app'
+$: << 'lib'
+require './app'
 run KivaLoansApp
 

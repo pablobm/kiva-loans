@@ -2,10 +2,10 @@ require 'sinatra/base'
 require 'net/http'
 require 'multi_json'
 
-require 'lib/sinatra/flash'
-require 'lib/sinatra/content_for'
-require 'lib/sinatra/html_helper'
-require 'lib/kiva_loans/loan'
+require 'sinatra/flash'
+require 'sinatra/content_for'
+require 'sinatra/html_helper'
+require 'kiva_loans/loan'
 
 class KivaLoansApp < Sinatra::Base
 
