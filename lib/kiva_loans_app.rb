@@ -1,10 +1,12 @@
 require 'sinatra/base'
 require 'net/http'
 require 'multi_json'
+require 'dotenv/load'
 
 require 'sinatra/flash'
 require 'sinatra/content_for'
 require 'sinatra/html_helper'
+require 'kiva_loans/config_helper'
 require 'kiva_loans/loan'
 
 class KivaLoansApp < Sinatra::Base
@@ -42,6 +44,7 @@ class KivaLoansApp < Sinatra::Base
     include Sinatra::Flash
     include Sinatra::HtmlHelper
     include Rack::Utils
+    include ConfigHelper
     alias_method :h, :escape_html
   end
 
