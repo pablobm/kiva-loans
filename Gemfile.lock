@@ -2,17 +2,17 @@ GEM
   remote: https://rubygems.org/
   specs:
     dotenv (2.7.2)
-    multi_json (1.12.2)
-    mustermann (1.0.1)
-    rack (2.0.3)
-    rack-protection (2.0.0)
+    multi_json (1.13.1)
+    mustermann (1.0.3)
+    rack (2.0.7)
+    rack-protection (2.0.5)
       rack
-    sinatra (2.0.0)
+    sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
-      rack-protection (= 2.0.0)
+      rack-protection (= 2.0.5)
       tilt (~> 2.0)
-    tilt (2.0.8)
+    tilt (2.0.9)
 
 PLATFORMS
   java
