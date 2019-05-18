@@ -4,4 +4,27 @@ A site I built back in 2009. An experiment involving [Sinatra](http://www.sinatr
 
 The site is accessible at http://kiva-loans.herokuapp.com.
 
+## How to run locally
+
+Install dependencies:
+
+```
+$ bundle install
+```
+
+Copy the sample env file and fill it out with the appropriate values:
+
+```
+$ cp .env.sample .env
+$ vi .env
+```
+
+Run:
+
+```
+$ rackup
+```
+
+## License
+
 This work is in the Public Domain. Do whatever you like with it.
